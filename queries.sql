@@ -126,3 +126,4 @@ alter table classes rename column semester to semester_code;
 
 -- update a row
 update students set bio = "Stays in AMK" where student_id=2;
+
