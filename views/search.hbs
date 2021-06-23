@@ -1,0 +1,34 @@
+{{#extends 'base'}}
+
+{{#block 'content'}}
+<h1>Movies</h1>
+
+{{!-- since we are searching the db, and retrieving info, we are adding new data, therefore we should use GET --}}
+<form method ="GET">
+    <input type ="text" placeholder ="Search terms" class="form-control" name="search_terms"/>
+    <input type="submit" value="Search"  class="btn btn-primary my-3"/>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Actor ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Last Update</th>
+        </tr>
+    </thead>
+    
+    {{#each actors}}
+    <tr>
+        <td>{{this.actor_id}}</td>
+        <td>{{this.first_name}}</td>
+        <td>{{this.last_name}}</td>
+        <td>{{this.last_update}}</td>
+    </tr>
+    {{/each}}
+</table>
+
+{{/block}}
+
+{{/extends}}

@@ -143,3 +143,31 @@ WHERE jobTitle = "Sales Rep"
 group by employees.officeCode, city, state
 HAVING count(*) > 2
 ORDER BY city DESC
+
+/** SUBQUERIES **/
+
+/* Find the average employee per office */
+  select (select count(*) from employees) /  (select count(*) from offices) 
+
+/* Find all the offices which employee count is higher than average */
+select officeCode, count(*) from employees
+group by officeCode
+having count(*) >  (select count(*) from employees) /  (select count(*) from offices)
+
+/* Find all the customers who do not have a sales rep */
+/* the set of all customers without sales rep is the set of all customers
+ - the set of customers with sales rep */
+
+select * from customers where customerNumber NOT IN
+	(select customerNumber from customers where salesRepEmployeeNumber IS NOT NULL)
+
+
+/* Find all the products that have not been ordered before */
+select * from products where 
+ productCode not in (SELECT distinct productCode FROM orderdetails)
+
+
+ /* PREPARED STATEMENTS */
+ select * from employees where officeCode = ?
+
+ /* in a follow-up, we specify where each ? is */

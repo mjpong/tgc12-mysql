@@ -1,0 +1,51 @@
+{{#extends 'base'}}
+
+{{#block 'content'}}
+<h1>Customer</h1>
+
+{{!-- since we are searching the db, and retrieving info, we are adding new data, therefore we should use GET --}}
+<form method ="GET">
+    <input type ="text" placeholder ="Search Name" class="form-control" name="search_name"/>
+    <input type="submit" value="Search"  class="btn btn-primary my-3"/>
+
+    <input type ="text" placeholder ="Search Email" class="form-control" name="search_email"/>
+    <input type="submit" value="Search"  class="btn btn-primary my-3"/>
+
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Customer ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Active</th>
+        </tr>
+    </thead>
+    
+    {{#if customer}}
+        {{#each customer}}
+        <tr>
+            <td>{{this.customer_id}}</td>
+            <td>{{this.first_name}}</td>
+            <td>{{this.last_name}}</td>
+            <td>{{this.email}}</td>
+            <td>{{this.active}}</td>
+        </tr>
+        {{/each}}
+    {{else}}
+        <tr>
+            <td colspan="5">
+                <div class="alert alert-danger">
+                    There are no customers matching your critera
+                </div>
+            </td>
+        </tr>
+
+    {{/if }}
+</table>
+
+{{/block}}
+
+{{/extends}}
